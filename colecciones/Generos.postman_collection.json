@@ -1,0 +1,373 @@
+{
+	"info": {
+		"_postman_id": "36ebdc65-ea29-4b38-8d8e-80d5e019f91b",
+		"name": "Generos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Generos GET",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:3000/generos",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"generos"
+					]
+				},
+				"description": "Consigue todos los generos"
+			},
+			"response": []
+		},
+		{
+			"name": "GET de un genero especifico",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4ab1f169-cd91-493b-adff-518214d23530",
+						"exec": [
+							"pm.test(\"response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Se obtuvo el elemento correcto\", function () {\r",
+							"    var obj= pm.response.json();\r",
+							"    pm.expect(obj.genero).to.eql('Acción');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:3000/generos/2",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"generos",
+						"2"
+					]
+				},
+				"description": "Develve un genero especifico dada la id=1"
+			},
+			"response": []
+		},
+		{
+			"name": "GET de un genero inexistente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4ab1f169-cd91-493b-adff-518214d23530",
+						"exec": [
+							"pm.test(\"response is bad request\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:3000/generos/5",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"generos",
+						"5"
+					]
+				},
+				"description": "Intenta conseguir un genero por id=5 pero no existe, recibe mensaje error"
+			},
+			"response": []
+		},
+		{
+			"name": "POST agruea generor id 4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ef135773-dc10-45fa-b191-180272acca2d",
+						"exec": [
+							"pm.test(\"response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 4,\r\n    \"genero\": \"Terror\",\r\n    \"novelas\": [5, 10]\r\n}"
+				},
+				"url": {
+					"raw": "localhost:3000/generos",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"generos"
+					]
+				},
+				"description": "Agrega un genero llamado Terror con id 4"
+			},
+			"response": []
+		},
+		{
+			"name": "POST agruea genero id 2 ya existe ",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ef135773-dc10-45fa-b191-180272acca2d",
+						"exec": [
+							"pm.test(\"response is bad request\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 2,\r\n    \"genero\": \"Terror\",\r\n    \"novelas\": [5, 10]\r\n}"
+				},
+				"url": {
+					"raw": "localhost:3000/generos",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"generos"
+					]
+				},
+				"description": "Agrega un genero llamado Terror con id 2, pero no puede dado que ya existe"
+			},
+			"response": []
+		},
+		{
+			"name": "PUT cambia genero con id 4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3e8be9f9-ae56-4c45-893b-85145535cf27",
+						"exec": [
+							"pm.test(\"response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"modifica el elemento\", function () {\r",
+							"    var obj= pm.response.json();\r",
+							"    pm.expect(obj.genero).to.eql('Maduro');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 4,\r\n    \"genero\": \"Maduro\",\r\n    \"novelas\": [5, 10]\r\n}"
+				},
+				"url": {
+					"raw": "localhost:3000/generos/4",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"generos",
+						"4"
+					]
+				},
+				"description": "Cambia el nombre del genero con id 4 de Terror a Maduro"
+			},
+			"response": []
+		},
+		{
+			"name": "PUT cambia genero a un id inexistente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3e8be9f9-ae56-4c45-893b-85145535cf27",
+						"exec": [
+							"pm.test(\"response is a bad request\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 7,\r\n    \"genero\": \"Maduro\",\r\n    \"novelas\": [5, 10]\r\n}"
+				},
+				"url": {
+					"raw": "localhost:3000/generos/9",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"generos",
+						"9"
+					]
+				},
+				"description": "Cambia el nombre del genero con id 9, pero no existe por ello recibe mensaje de error"
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE un genero con id 4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "16309435-64d8-448d-a976-18e02c5ff0d2",
+						"exec": [
+							"pm.test(\"response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:3000/generos/4",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"generos",
+						"4"
+					]
+				},
+				"description": "Borra el genero con id 4"
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE un genero con id 8",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "16309435-64d8-448d-a976-18e02c5ff0d2",
+						"exec": [
+							"pm.test(\"response is bad request\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:3000/generos/8",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"generos",
+						"8"
+					]
+				},
+				"description": "Borra el genero con id 8 que no existe y por ello no puede"
+			},
+			"response": []
+		}
+	]
+}

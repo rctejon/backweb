@@ -1,0 +1,396 @@
+{
+	"info": {
+		"_postman_id": "6d435f18-8326-41e2-bf50-772d960141f8",
+		"name": "Usuarios",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get todos los usuarios",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d1cfa001-4e38-4e9b-a96f-c2772da8efc3",
+						"exec": [
+							"pm.test(\"response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000/usuarios",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"usuarios"
+					]
+				},
+				"description": "da todos los usuarios"
+			},
+			"response": []
+		},
+		{
+			"name": "Get de un usuario especifico",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f981f157-5f2d-4e0a-a8da-58ba552744a6",
+						"exec": [
+							"pm.test(\"response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000/usuarios/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"usuarios",
+						"1"
+					]
+				},
+				"description": "busca un usuario por ID"
+			},
+			"response": []
+		},
+		{
+			"name": "Post de un usuario",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a6d9802a-001c-4eb4-9eaa-93acd54880e6",
+						"exec": [
+							"pm.test(\"response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"id\": 15,\n        \"nombre\": \"test15\",\n        \"playlists\": [\n            \"1\",\n            \"2\",\n            \"3\"\n        ],\n        \"recomendaciones\": [\n            \"recomendacion1\",\n            \"recomendacion2\",\n            \"recomendacion3\"\n        ]\n    }"
+				},
+				"url": {
+					"raw": "http://localhost:3000/usuarios",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"usuarios"
+					]
+				},
+				"description": "crea un usuario"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete de un usuario",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6925c5af-ad82-463d-b766-d58f544504ae",
+						"exec": [
+							"pm.test(\"response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000/usuarios/15",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"usuarios",
+						"15"
+					]
+				},
+				"description": "borra un usuario"
+			},
+			"response": []
+		},
+		{
+			"name": "Put de un usuario existente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "94f7ef3b-5bc0-476d-8a2e-1619304add38",
+						"exec": [
+							"pm.test(\"response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"modifica el elemento\", function () {\r",
+							"    var obj= pm.response.json();\r",
+							"    pm.expect(obj.nombre).to.eql('SeCambioYaY');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"id\": 1,\n        \"nombre\": \"SeCambioYaY\",\n        \"playlists\": [\n            \"1\",\n            \"2\",\n            \"3\"\n        ],\n        \"recomendaciones\": [\n            \"recomendacion1\",\n            \"recomendacion2\",\n            \"recomendacion3\"\n        ]\n    }"
+				},
+				"url": {
+					"raw": "http://localhost:3000/usuarios/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"usuarios",
+						"1"
+					]
+				},
+				"description": "cambia el usuario con una ID especifica"
+			},
+			"response": []
+		},
+		{
+			"name": "Get erroneo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "96cfdcb3-01d2-451d-b62c-e9964b63bae1",
+						"exec": [
+							"pm.test(\"response is ok\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000/usuarios/9999999",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"usuarios",
+						"9999999"
+					]
+				},
+				"description": "reviso que bote error cuando no existe la ID"
+			},
+			"response": []
+		},
+		{
+			"name": "Post erroneo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "76242421-ebb5-4772-8ac1-9f1d7eec46c9",
+						"exec": [
+							"pm.test(\"response is bad request\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"id\": 1,\n        \"nombre\": \"SeCambioYaY\",\n        \"playlists\": [\n            \"1\",\n            \"2\",\n            \"3\"\n        ],\n        \"recomendaciones\": [\n            \"recomendacion1\",\n            \"recomendacion2\",\n            \"recomendacion3\"\n        ]\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/usuarios",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"usuarios"
+					]
+				},
+				"description": "tratra de crear un usuario existente"
+			},
+			"response": []
+		},
+		{
+			"name": "Put erroneo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e0caad7e-b95b-4d1d-a63e-3b30433b943a",
+						"exec": [
+							"pm.test(\"response is not found\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"id\": 99999,\n        \"nombre\": \"99999\",\n        \"playlists\": [\n            \"1\",\n            \"2\",\n            \"3\"\n        ],\n        \"recomendaciones\": [\n            \"recomendacion1\",\n            \"recomendacion2\",\n            \"recomendacion3\"\n        ]\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/usuarios/99999",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"usuarios",
+						"99999"
+					]
+				},
+				"description": "trata de modificar un usuario inexistente"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete erroneo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7ad25a4f-b8b6-4403-9f64-2647d876d702",
+						"exec": [
+							"pm.test(\"response is not found\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000/usuarios/99999",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"usuarios",
+						"99999"
+					]
+				},
+				"description": "trata de borar un usuario inexistente"
+			},
+			"response": []
+		}
+	]
+}

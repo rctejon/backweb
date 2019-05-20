@@ -1,0 +1,390 @@
+{
+	"info": {
+		"_postman_id": "9c9261de-9420-4d6a-93f6-9a3f4cd1163f",
+		"name": "Autores",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET de todos los autores",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "70b2c2f7-ff65-48ab-b988-24247df538db",
+						"exec": [
+							"pm.test(\"response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:3000/Autores",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Autores"
+					]
+				},
+				"description": "Consigue una lista con todos los autores"
+			},
+			"response": []
+		},
+		{
+			"name": "GET de un autor especifico",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c481a88e-02d1-4060-af7e-30e8c8b66fa2",
+						"exec": [
+							"pm.test(\"response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"modifica el elemento\", function () {\r",
+							"    var obj= pm.response.json();\r",
+							"    pm.expect(obj.nombre).to.eql('Du Wei Qu');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:3000/autores/1",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"autores",
+						"1"
+					]
+				},
+				"description": "Consigue un solo autor por id"
+			},
+			"response": []
+		},
+		{
+			"name": "GET de un autor especifico que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4ea188f1-026d-4385-ac7f-d1a1634b08f4",
+						"exec": [
+							"pm.test(\"response is ok\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:3000/autores/10",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"autores",
+						"10"
+					]
+				},
+				"description": "Consigue un solo autor por id"
+			},
+			"response": []
+		},
+		{
+			"name": "POST agrega un autor nuevo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0735c6e5-65c0-4c70-8830-0ea82b19ca1f",
+						"exec": [
+							"pm.test(\"response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\":5,\n\t\"nombre\": \"PruebaPost\",\n\t\"idioma\": \"Chibchombia\",\n\t\"novelas\": [7]\n}"
+				},
+				"url": {
+					"raw": "localhost:3000/Autores",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Autores"
+					]
+				},
+				"description": "Agrega a un autor con id 5"
+			},
+			"response": []
+		},
+		{
+			"name": "POST agrega un autor existente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "efe57d2f-5c14-4481-a929-a2107f7fdb6d",
+						"exec": [
+							"pm.test(\"response is bad request\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\":1,\n\t\"nombre\": \"PruebaPost\",\n\t\"idioma\": \"Chibchombia\",\n\t\"novelas\": [7]\n}"
+				},
+				"url": {
+					"raw": "localhost:3000/Autores",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Autores"
+					]
+				},
+				"description": "Agrega a un autor con id 5"
+			},
+			"response": []
+		},
+		{
+			"name": "PUT cambia un autor existente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f161dbc7-b833-4142-a52c-9246687169cb",
+						"exec": [
+							"pm.test(\"response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"modifica el elemento\", function () {\r",
+							"    var obj= pm.response.json();\r",
+							"    pm.expect(obj.nombre).to.eql('Cola');\r",
+							"});\r",
+							"pm.test(\"modifica el elemento\", function () {\r",
+							"    var obj= pm.response.json();\r",
+							"    pm.expect(obj.idioma).to.eql('Japon');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\":5,\n\t\"nombre\": \"Cola\",\n\t\"idioma\": \"Japon\",\n\t\"novelas\": [4]\n}"
+				},
+				"url": {
+					"raw": "localhost:3000/autores/5",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"autores",
+						"5"
+					]
+				},
+				"description": "Cambia nombre del el autor con id 5 a Cola"
+			},
+			"response": []
+		},
+		{
+			"name": "PUT cambia un autor que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1a480005-980d-433f-82e1-a4bd4b0ecaef",
+						"exec": [
+							"pm.test(\"response is ok\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\":30,\n\t\"nombre\": \"Cola\",\n\t\"idioma\": \"Japon\",\n\t\"novelas\": [4]\n}"
+				},
+				"url": {
+					"raw": "localhost:3000/autores/30",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"autores",
+						"30"
+					]
+				},
+				"description": "Cambia nombre del el autor con id 30 a Cola"
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE elimina un autor existente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "11b63a2b-e7d1-4f13-9e26-2bd24ae7fb0d",
+						"exec": [
+							"pm.test(\"response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:3000/Autores/5",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Autores",
+						"5"
+					]
+				},
+				"description": "Borra al autor con id 1"
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE elimina un autor que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2fddcaf1-afdd-4ab0-bed9-93b7bc37519e",
+						"exec": [
+							"pm.test(\"response is bad\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:3000/Autores/33",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Autores",
+						"33"
+					]
+				},
+				"description": "Borra al autor con id 1"
+			},
+			"response": []
+		}
+	]
+}

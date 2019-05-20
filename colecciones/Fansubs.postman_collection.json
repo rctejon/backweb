@@ -1,0 +1,388 @@
+{
+	"info": {
+		"_postman_id": "e9d7d27d-939a-436f-9c82-cbf1700cf6bb",
+		"name": "Fansubs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET de todos los fansubs",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e876b855-03bb-42ae-8120-2309952f92d3",
+						"exec": [
+							"pm.test(\"response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:3000/fansubs",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"fansubs"
+					]
+				},
+				"description": "Consigue todos los fansubs"
+			},
+			"response": []
+		},
+		{
+			"name": "GET de un fansub especifico",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "43f6b4af-2be0-4ede-ae58-5464905cb1c9",
+						"exec": [
+							"pm.test(\"response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"modifica el elemento\", function () {\r",
+							"    var obj= pm.response.json();\r",
+							"    pm.expect(obj.nombre).to.eql('Gravity Tales');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:3000/fansubs/1",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"fansubs",
+						"1"
+					]
+				},
+				"description": "Consigue un fansub por id 1"
+			},
+			"response": []
+		},
+		{
+			"name": "GET de un fansub que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "85ea166e-4940-44b3-bc3c-27e6da9457ae",
+						"exec": [
+							"pm.test(\"response is bad request\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:3000/fansubs/6",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"fansubs",
+						"6"
+					]
+				},
+				"description": "Consigue un fansub con id 6 que no existe y se espera un mensaje de error"
+			},
+			"response": []
+		},
+		{
+			"name": "POST de un nuevo fansub",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cf28b622-de4b-47f0-921a-f6ef890bbdb2",
+						"exec": [
+							"pm.test(\"response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 4,\r\n    \"nombre\": \"Test fansub post\",\r\n    \"url\": \"https://fansubpost.com/\",\r\n    \"novelas\": []\r\n}"
+				},
+				"url": {
+					"raw": "localhost:3000/fansubs",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"fansubs"
+					]
+				},
+				"description": "Agrega un fansub llamado Nob Translations con id 4"
+			},
+			"response": []
+		},
+		{
+			"name": "POST de un fansub existente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "98181821-cf52-4316-824d-4238f6f899c3",
+						"exec": [
+							"pm.test(\"response is bad request\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 1,\r\n    \"nombre\": \"Test fansub post\",\r\n    \"url\": \"https://fansubpost.com/\",\r\n    \"novelas\": []\r\n}"
+				},
+				"url": {
+					"raw": "localhost:3000/fansubs",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"fansubs"
+					]
+				},
+				"description": "Agrega un fansub llamado Nob Translations con id 1, se debe recibir un mensaje de error"
+			},
+			"response": []
+		},
+		{
+			"name": "PUT de un fansub existente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "049da4ba-49da-4fd8-9ca2-0c372fd46c6b",
+						"exec": [
+							"pm.test(\"response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"modifica el elemento\", function () {\r",
+							"    var obj= pm.response.json();\r",
+							"    pm.expect(obj.nombre).to.eql('Wuxia2');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 4,\n    \"nombre\": \"Wuxia2\",\n    \"url\": \"https://www.wuxiaworld.com/\",\n    \"novelas\": [3,6]\n}"
+				},
+				"url": {
+					"raw": "localhost:3000/fansubs/4",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"fansubs",
+						"4"
+					]
+				},
+				"description": "Cambia el fansub con id 4, le cambia el nombre a Wuxia1"
+			},
+			"response": []
+		},
+		{
+			"name": "PUT de un fansub inexistente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2b21b6c5-f110-498b-a6da-ea86ebac271f",
+						"exec": [
+							"pm.test(\"response is bad request\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 2,\n    \"nombre\": \"Wuxia2\",\n    \"url\": \"https://www.wuxiaworld.com/\",\n    \"novelas\": [3,6]\n}"
+				},
+				"url": {
+					"raw": "localhost:3000/fansubs/8324",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"fansubs",
+						"8324"
+					]
+				},
+				"description": "Cambia el fansub con id 8, no lo logra"
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE de un fansub existente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e15ecb1c-9b59-40f6-80b5-a87b59de196a",
+						"exec": [
+							"pm.test(\"response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:3000/fansubs/4",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"fansubs",
+						"4"
+					]
+				},
+				"description": "Se elimina un fansub con id 3 y que existe"
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE de un fansub que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "355bc22d-310c-4d40-85b8-d0d77b51b835",
+						"exec": [
+							"pm.test(\"response is bad request\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:3000/fansubs/33",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"fansubs",
+						"33"
+					]
+				},
+				"description": "Se intenta elimina un fansub con id 33 que no existe y se debe deve recibir mensaje de error"
+			},
+			"response": []
+		}
+	]
+}

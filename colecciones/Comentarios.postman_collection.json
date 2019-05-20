@@ -1,0 +1,394 @@
+{
+	"info": {
+		"_postman_id": "e18bb621-e1a6-4342-85a0-c0d32b658411",
+		"name": "Comentarios",
+		"description": "Pruebas GET, POST, PUT, DELETE de el recurso Comentarios",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET todas las Cometarios",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b0e08053-74a8-4f06-9012-773deb2c4d53",
+						"exec": [
+							"pm.test(\"response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:3000/Comentarios",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Comentarios"
+					]
+				},
+				"description": "obtiene todas las Cometarios"
+			},
+			"response": []
+		},
+		{
+			"name": "POST de un comentario no existente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7e54ae61-32b3-4ae7-a17b-d7be978ca795",
+						"exec": [
+							"pm.test(\"response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"id\": 2,\n        \"novela\": 1,\n        \"estrellas\": 3.7,\n        \"comentario\": \"comment \"\n    }"
+				},
+				"url": {
+					"raw": "localhost:3000/Comentarios",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Comentarios"
+					]
+				},
+				"description": "Hace post de un comentario con id no existente"
+			},
+			"response": []
+		},
+		{
+			"name": "POST de un comentario existente ",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7e54ae61-32b3-4ae7-a17b-d7be978ca795",
+						"exec": [
+							"pm.test(\"response is bad request\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"id\": 2,\n        \"novela\": 1,\n        \"estrellas\": 3.7,\n        \"comentario\": \"comment \"\n    }"
+				},
+				"url": {
+					"raw": "localhost:3000/Comentarios",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Comentarios"
+					]
+				},
+				"description": "Hace post de un comentario con id no existente"
+			},
+			"response": []
+		},
+		{
+			"name": "PUT comentario de id existente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "683eb991-4107-4e58-b840-a89c028b9f51",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"response is ok\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"modifica el elemento\", function () {",
+							"    var obj= pm.response.json();",
+							"    pm.expect(obj.estrellas).to.eql(4.7);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"id\": 2,\n        \"novela\": 2,\n        \"estrellas\": 4.7,\n        \"comentario\": \"comment \"\n    }"
+				},
+				"url": {
+					"raw": "localhost:3000/Comentarios/2",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Comentarios",
+						"2"
+					]
+				},
+				"description": "modifica un comentario que existe"
+			},
+			"response": []
+		},
+		{
+			"name": "PUT comentario de id no existente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f83d71e9-bd21-4716-af93-602a6c2ad24e",
+						"exec": [
+							"pm.test(\"response is ok\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"id\": 2,\n        \"novela\": 2,\n        \"texto\": \"dwad\",\n        \"fansub\": 2\n    }"
+				},
+				"url": {
+					"raw": "localhost:3000/Comentarios/9957952",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Comentarios",
+						"9957952"
+					]
+				},
+				"description": "modifica un comentario que no existe"
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE comentario de id no existente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dc15b6ec-9264-4334-bbf3-eefeead75338",
+						"exec": [
+							"pm.test(\"response is ok\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:3000/Comentarios/92775324",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Comentarios",
+						"92775324"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE comentario de id existente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dc15b6ec-9264-4334-bbf3-eefeead75338",
+						"exec": [
+							"pm.test(\"response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:3000/Comentarios/2",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Comentarios",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET comentario de id existente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "170d9f44-3c26-422f-886f-9c29d44dcaf9",
+						"exec": [
+							"pm.test(\"response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:3000/Comentarios/1",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Comentarios",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET comentario de id no existente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "31e35b43-9e20-462d-a342-b47ae11dc18c",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"response is ok\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:3000/Comentarios/1237891",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Comentarios",
+						"1237891"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "362a4c78-5e3d-4176-a6d4-02f15904efaa",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "4a9cef9f-5b14-4bd2-aef0-34f92e410593",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

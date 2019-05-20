@@ -1,0 +1,394 @@
+{
+	"info": {
+		"_postman_id": "2dd3994c-c8c6-47b2-813d-1daff249cc71",
+		"name": "Capitulos",
+		"description": "Pruebas GET, POST, PUT, DELETE de el recurso Capitulo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET todas las Capitulos",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b0e08053-74a8-4f06-9012-773deb2c4d53",
+						"exec": [
+							"pm.test(\"response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:3000/Capitulos",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Capitulos"
+					]
+				},
+				"description": "obtiene todas las capitulos"
+			},
+			"response": []
+		},
+		{
+			"name": "POST de un capitulo no existente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7e54ae61-32b3-4ae7-a17b-d7be978ca795",
+						"exec": [
+							"pm.test(\"response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"id\": 2,\n        \"novela\": 2,\n        \"texto\": \"texto\",\n        \"fansub\": 2\n    }"
+				},
+				"url": {
+					"raw": "localhost:3000/Capitulos",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Capitulos"
+					]
+				},
+				"description": "Hace post de un capitulo con id no existente"
+			},
+			"response": []
+		},
+		{
+			"name": "POST de un capitulo existente ",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7e54ae61-32b3-4ae7-a17b-d7be978ca795",
+						"exec": [
+							"pm.test(\"response is bad request\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"id\": 2,\n        \"novela\": 2,\n        \"texto\": \"texto\",\n        \"fansub\": 2\n    }"
+				},
+				"url": {
+					"raw": "localhost:3000/Capitulos",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Capitulos"
+					]
+				},
+				"description": "Hace post de un capitulo con id no existente"
+			},
+			"response": []
+		},
+		{
+			"name": "PUT capitulo de id existente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9b77a2eb-6b99-4703-a0dc-3b782c45fa6d",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"response is ok\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"modifica el elemento\", function () {",
+							"    var obj= pm.response.json();",
+							"    pm.expect(obj.texto).to.eql('super texto');",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"id\": 2,\n        \"novela\": 2,\n        \"texto\": \"super texto\",\n        \"fansub\": 2\n    }"
+				},
+				"url": {
+					"raw": "localhost:3000/Capitulos/2",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Capitulos",
+						"2"
+					]
+				},
+				"description": "modifica una capitulo que existe"
+			},
+			"response": []
+		},
+		{
+			"name": "PUT capitulo de id no existente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f83d71e9-bd21-4716-af93-602a6c2ad24e",
+						"exec": [
+							"pm.test(\"response is ok\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"id\": 2,\n        \"novela\": 2,\n        \"texto\": \"dwad\",\n        \"fansub\": 2\n    }"
+				},
+				"url": {
+					"raw": "localhost:3000/Capitulos/9957952",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Capitulos",
+						"9957952"
+					]
+				},
+				"description": "modifica un capitulo que no existe"
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE capitulo de id no existente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dc15b6ec-9264-4334-bbf3-eefeead75338",
+						"exec": [
+							"pm.test(\"response is ok\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:3000/Capitulos/92775324",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Capitulos",
+						"92775324"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE capitulo de id existente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dc15b6ec-9264-4334-bbf3-eefeead75338",
+						"exec": [
+							"pm.test(\"response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:3000/Capitulos/2",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Capitulos",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET capitulo de id existente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "170d9f44-3c26-422f-886f-9c29d44dcaf9",
+						"exec": [
+							"pm.test(\"response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:3000/Capitulos/1",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Capitulos",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET capitulo de id no existente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "31e35b43-9e20-462d-a342-b47ae11dc18c",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"response is ok\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:3000/Capitulos/1237891",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Capitulos",
+						"1237891"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "362a4c78-5e3d-4176-a6d4-02f15904efaa",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "4a9cef9f-5b14-4bd2-aef0-34f92e410593",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
