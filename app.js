@@ -12,7 +12,7 @@ var fansubsRouter= require('./routes/fansubs');
 var generosRouter= require('./routes/generos');
 var capitulosRouter= require('./routes/capitulos');
 var comentariosRouter= require('./routes/comentarios');
-var playlistsRouter= require('./routes/playlists');
+var playlistsRouter= require('./routes/Playlists');
 var recomendacionesRouter= require('./routes/recomendaciones');
 var app = express();
 
